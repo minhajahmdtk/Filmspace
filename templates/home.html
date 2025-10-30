@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}Home | FilmSpace{% endblock %}
+{% load static %}
+{% block content %}
+<div style="text-align: center; margin-top: 50px;">
+  <div>
+    <a href="{% url 'movies' %}">
+      <img src="{% static 'movies.jpg' %}" 
+         alt="Movies" 
+         style="width: 300px; height: 300px; margin: 20px; border-radius: 10px; cursor: pointer;">
+    </a>
+ </div> 
+
+  <div> 
+    <a href="{% url 'series' %}">
+      <img src="{% static 'series.jpg' %}" 
+         alt="Series" 
+         style="width: 300px; height: 300px; margin: 20px; border-radius: 10px; cursor: pointer;">
+    </a>
+  </div>
+</div>
+{% endblock %}

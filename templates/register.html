@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Register | FilmSpace {% endblock %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  <label for="username">Username:</label><br>
+  <input type="text" id="username" name="user_name" required><br><br>
+
+  <label for="firstname">First Name:</label><br>
+  <input type="text" id="firstname" name="first_name" required><br><br>
+  
+  <label for="lastname">Last Name:</label><br>
+  <input type="text" id="lastname" name="last_name" required><br><br>
+  
+  <label for="email">Email:</label><br>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <label for="password">Password:</label><br>
+  <input type="password" id="pass_word" name="pass_word" required><br><br>
+
+  <label for="password2">Confirm Password:</label><br>
+  <input type="password" id="confirm" name="confirm" required><br><br>
+
+  <input type="submit" value="Register" id="submit">
+</form>
+
+{% for msg in messages %}
+<p>{{ msg }}</p>
+{% endfor %}
+
+
+{% endblock %}

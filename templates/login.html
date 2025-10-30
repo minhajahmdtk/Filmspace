@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block title %} SignIn | FilmSpace {% endblock %}
+
+{% block content %}
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <label>Username:</label><br>
+  <input type="text" name="username" required><br><br>
+
+  <label>Password:</label><br>
+  <input type="password" name="password" required><br><br>
+
+  <button type="submit">Sign In</button>
+</form>
+
+{% for msg in messages %}
+<p>{{ msg }}</p>
+{% endfor %}
+
+{% endblock %}
