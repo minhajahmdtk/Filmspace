@@ -1,21 +1,91 @@
- .navbar {
+.navbar {
       background-color: #0d0d0d;
-    }
-    .navbar-brand {
+}
+.navbar-brand {
       font-weight: bold;
       color: #ff4757;
       font-size: 1.5rem;
-    }
-    .nav-link {
+}
+.nav-link {
       color: white;
       font-size: 1.1rem;
-    }
-    .btn-signin {
+}
+.btn-signin {
       background-color: #ff4757;
       color: white;
       border-radius: 20px;
       padding: 5px 15px;
-    }
-    .btn-signin:hover {
+}
+.btn-signin:hover {
       background-color: #ff6b81;
-    }
+}
+
+body {
+    background-color: #ffffff;
+}
+.card {
+    border: none;
+    border-radius: 15px;
+    overflow: hidden;
+    background-color: #000;
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+}
+
+.card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.4);
+}
+
+.card-img-top {
+    height: 350px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 20px;
+    background-color: #000;
+}
+
+.movie-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.movie-director, .movie-genre, .movie-language {
+    font-size: 0.95rem;
+    color: #a30808;
+    margin-bottom: 6px;
+}
+
+.movie-description {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin-top: 10px;
+    line-height: 1.5;
+}
+
+.text-center{
+    font-weight: 700;
+}
+
+ .series-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .series-director, .series-description, .series-language, .series-seasons {
+    font-size: 0.95rem;
+    color: #691414;
+    margin-bottom: 6px;
+  }
+
+  .series-description {
+    font-size: 0.9rem;
+    color: #ddd;
+    margin-top: 10px;
+    line-height: 1.5;
+  }

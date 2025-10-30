@@ -1,0 +1,60 @@
+{% extends 'admin_base.html' %}
+{% block title %}Update Movie | FilmSpace{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 mx-auto" style="max-width: 600px; background-color: #f8f9fa;">
+    <h2 class="text-center mb-4">🎬 Update Movie</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Movie Name</label>
+        <input type="text" name="movie_name" value="{{ movie.movie_name }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Year</label>
+        <input type="number" name="movie_year" value="{{ movie.movie_year }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Language</label>
+        <input type="text" name="movie_language" value="{{ movie.movie_language }}" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Genre</label>
+        <input type="text" name="movie_genre" value="{{ movie.movie_genre }}" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Director</label>
+        <input type="text" name="movie_director" value="{{ movie.movie_director }}" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea name="movie_description" rows="4" class="form-control">{{ movie.movie_description }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Current Image</label><br>
+        {% if movie.movie_image %}
+          <img src="{{ movie.movie_image.url }}" alt="Movie Image" class="img-thumbnail mb-2" style="width:150px;">
+        {% else %}
+          <p>No image uploaded</p>
+        {% endif %}
+        <input type="file" name="movie_image" class="form-control mt-2">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary px-4">Update Movie</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,11 +1,51 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Movies</h1>
-</body>
-</html>
+{% extends 'base_home.html' %}
+{% block title %}Home | FilmSpace{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container my-5">
+  <h1 class="text-center mb-2">Movies</h1>
+  <div class="row">
+    {% for mov in mov1 %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <img src="{{ mov.movie_image.url }}" class="card-img-top" alt="{{ mov.movie_image }}">
+        
+        <div class="card-body">
+          <div class="movie-title">{{ mov.movie_name }} ({{ mov.movie_year }})</div>
+          <div class="movie-director">Director: {{ mov.movie_director }}</div>
+          <div class="movie-genre">{{ mov.movie_genre }}</div>
+          <div class="movie-language">{{ mov.movie_language }}</div>
+          <div class="movie-description">{{ mov.movie_description }}</div>
+        </div>
+      </div>
+       <div class="text-center mt-3">
+  <a href="{% url 'add_movie_watchlist' mov.id %}" class="btn btn-outline-warning px-4 py-2">Move to Watchlist</a>
+</div>
+<div class="text-center mt-3">
+  <a href="{% url 'movie_watchlist' %}" class="btn btn-outline-warning px-4 py-2">View Watchlist </a>
+</div>
+    </div>
+    {% endfor %}
+   
+
+  </div>
+
+
+
+
+  {% if mov1.paginator.num_pages > 1 %}
+  <div class="text-center">
+    {% for mov in mov1.paginator.page_range %}
+    <a href="?page={{ mov }}" class="btn btn-light mx-1">{{ mov }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% for mov in messages %}
+<p>{{ mov }}</p>
+{% endfor %}
+
+{% endblock %}

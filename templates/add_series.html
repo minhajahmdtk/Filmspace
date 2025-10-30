@@ -1,0 +1,60 @@
+{% extends 'admin_base.html' %}
+{% block title %}Add Series | FilmSpace{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 mx-auto" style="max-width: 600px;">
+    <h2 class="text-center mb-4">📺 Add New Series</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Series Name</label>
+        <input type="text" name="series_name" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Year</label>
+        <input type="text" name="series_year" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Language</label>
+        <input type="text" name="series_language" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Genre</label>
+        <input type="text" name="series_genre" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Seasons</label>
+        <input type="text" name="series_seasons" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Director</label>
+        <input type="text" name="series_director" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea name="series_description" rows="4" class="form-control"></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Upload Image</label>
+        <input type="file" name="series_image" class="form-control" required>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-success px-4">Add Series</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'admin_base.html' %}
+{% block title %}Update Series | FilmSpace{% endblock %}
+{% load static %}
+{% block content %}
+
+<div class="container mt-5">
+  <div class="card shadow-lg p-4 mx-auto" style="max-width: 600px; background-color: #f8f9fa;">
+    <h2 class="text-center mb-4">📺 Update Series</h2>
+
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Series Name</label>
+        <input type="text" name="series_name" value="{{ series.series_name }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Year</label>
+        <input type="number" name="series_year" value="{{ series.series_year }}" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Language</label>
+        <input type="text" name="series_language" value="{{ series.series_language }}" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Genre</label>
+        <input type="text" name="series_genre" value="{{ series.series_genre }}" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Seasons</label>
+        <input type="number" name="series_seasons" value="{{ series.series_seasons }}" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Director</label>
+        <input type="text" name="series_director" value="{{ series.series_director }}" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea name="series_description" rows="4" class="form-control">{{ series.series_description }}</textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Current Image</label><br>
+        {% if series.series_image %}
+          <img src="{{ series.series_image.url }}" alt="Series Image" class="img-thumbnail mb-2" style="width:150px;">
+        {% else %}
+          <p>No image uploaded</p>
+        {% endif %}
+        <input type="file" name="series_image" class="form-control mt-2">
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="btn btn-primary px-4">Update Series</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

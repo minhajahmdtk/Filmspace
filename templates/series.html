@@ -1,11 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  <h1>Series</h1>
-</body>
-</html>
+{% extends 'base_home.html' %}
+{% block title %}Series | FilmSpace{% endblock %}
+{% load static %}
+{% block content %}
+
+
+
+<div class="container my-5">
+  <h1 class="text-center mb-4">Series</h1>
+  <div class="row">
+    {% for sr in ser1 %}
+    <div class="col-md-4 mb-4">
+      <div class="card shadow-sm h-100">
+        <img src="{{sr.series_image.url}}" class="card-img-top" alt="{{sr.series_image}}">
+        <div class="card-body">
+          <div class="series-title">{{sr.series_name}} ({{sr.series_year}})</div>
+          <div class="series-director">Director: {{sr.series_director}}</div>
+          <div class="series-description">{{sr.series_genre}}</div>
+          <div class="series-language">{{sr.series_language}}</div>
+          <div class="series-seasons">{{sr.series_seasons}}</div>
+          <div class="series-description">{{sr.series_description}}</div>
+        </div>
+      </div>
+      <div class="text-center mt-3">
+  <a href="{% url 'add_series_watchlist' sr.id %}" class="btn btn-outline-warning px-4 py-2">Move to Watchlist</a>
+</div>
+<div class="text-center mt-3">
+  <a href="{% url 'series_watchlist' %}" class="btn btn-outline-warning px-4 py-2">View Watchlist </a>
+</div>
+    </div>
+    {% endfor %}
+  </div>
+
+  {% if ser1.paginator.num_pages > 1 %}
+  <div class="text-center mt-4">
+    {% for sr in ser1.paginator.page_range %}
+    <a href="?page={{ sr }}" class="btn btn-light ">{{ sr }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+
+{% for sr in messages %}
+<p>{{ sr }}</p>
+{% endfor %}
+{% endblock %}
