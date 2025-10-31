@@ -37,4 +37,13 @@
   </div>
 </div>
 
+  {% if admin_series.paginator.num_pages > 1 %}
+    <div class="text-center mt-4">
+      {% for i in admin_series.paginator.page_range %}
+      <a href="?page={{ i }}" class="btn btn-outline-dark mx-1">{{ i }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+
 {% endblock %}

@@ -16,6 +16,7 @@ urlpatterns = [
   path('movie_watchlist/', views.movie_watchlist, name='movie_watchlist'),
   path('series_watchlist/', views.series_watchlist, name='series_watchlist'),
   path('remove_series_watchlist/<int:ws_id>/', views.remove_series_watchlist, name='remove_series_watchlist'),
+  path('remove_movie_watchlist/<int:wm_id>/', views.remove_movie_watchlist, name='remove_movie_watchlist'),
   path('admin_login',views.admin_login,name='admin_login'),
   path('admin_home',views.admin_home,name='admin_home'),
   path('add_movie',views.add_movie,name='add_movie'),

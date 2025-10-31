@@ -79,6 +79,7 @@ def series(request):
 
 
 def add_movie_watchlist(request,movie_id):
+  page = request.GET.get('page', 1)
   try:
     movie_watch=Movie.objects.get(id=movie_id)
   except Movie.DoesNotExist:
@@ -94,10 +95,11 @@ def add_movie_watchlist(request,movie_id):
         )
   else:
     messages.info(request,f'"{movie_watch.movie_name}" already exists in Watchlist!')
-  return redirect('movies')
+  return redirect(f'/movies?page={page}')
 
 
 def add_series_watchlist(request,series_id):
+  page = request.GET.get('page', 1)
   try:
     series_watch=Series.objects.get(id=series_id)
   except Series.DoesNotExist:
@@ -114,7 +116,7 @@ def add_series_watchlist(request,series_id):
         )
   else:
     messages.info(request,f'"{series_watch.series_name}" already exists in Watchlist!')
-  return redirect('series')
+  return redirect(f'/series?page={page}')
         
 def movie_watchlist(request):
     mov_watch = MovieWatchlist.objects.all()
@@ -126,6 +128,18 @@ def movie_watchlist(request):
       mov_watchlist=pag.page(pag.num_pages)
     return render(request, 'movie_watchlist.html', {'mov_watch':mov_watchlist})
 
+
+def remove_movie_watchlist(request,wm_id):
+    try:
+        ws_delete = MovieWatchlist.objects.get(id=wm_id)
+        ws_delete.delete()
+    except MovieWatchlist.DoesNotExist:
+        messages.warning(request, "No movie found on the watchlist.")
+    
+    return redirect('movie_watchlist')
+
+
+
 def series_watchlist(request):
     ser_watch = SeriesWatchlist.objects.all()
     sr_watchlist=Paginator(ser_watch,1)
@@ -136,6 +150,15 @@ def series_watchlist(request):
     except (InvalidPage,EmptyPage):
       ser_watchlist=sr_watchlist.page(sr_watchlist.num_pages)
     return render(request, 'series_watchlist.html', {'sr_watch': ser_watchlist})
+
+  
+def remove_series_watchlist(request,ws_id):
+  try:
+    ws_delete=SeriesWatchlist.objects.get(id=ws_id)
+    ws_delete.delete()
+  except SeriesWatchlist.DoesNotExist:
+        messages.warning(request, "No series found on the watchlist.")
+  return redirect('series_watchlist')
 
 
 
@@ -182,7 +205,13 @@ def add_movie(request):
 
 
 def admin_manage_movies(request):
-  admin_movies=Movie.objects.all()
+  admin_movies_list=Movie.objects.all()
+  paginator=Paginator(admin_movies_list,1)
+  page=request.GET.get('page',1)
+  try:
+    admin_movies=paginator.page(page)
+  except (InvalidPage,EmptyPage):
+    admin_movies=paginator.page(paginator.num_pages)
   return render(request,'admin_manage_movies.html',{'admin_movies':admin_movies})
 
 def update_movie(request, p_id):
@@ -206,7 +235,7 @@ def update_movie(request, p_id):
 def delete_movie(request,delete_mov):
   delete=Movie.objects.get(id=delete_mov)
   delete.delete()
-  return redirect('admin_home')
+  return redirect('admin_manage_movies')
 
 #--------Series------
 #(Update,Delete,Add)
@@ -227,8 +256,17 @@ def add_series(request):
   return render(request,'add_series.html')
 
 
+
+
 def admin_manage_series(request):
-  admin_series=Series.objects.all()
+  admin_series_list=Series.objects.all()
+  paginator=Paginator(admin_series_list,1)
+  page=request.GET.get('page',1)
+  try:
+    admin_series=paginator.page(page)
+  except (InvalidPage,EmptyPage):
+    admin_series=paginator.page(paginator.num_pages)
+
   return render(request,'admin_manage_series.html',{'admin_series':admin_series})
 
 
@@ -250,12 +288,9 @@ def update_series(request, up_id):
         return redirect('admin_home')
     return render(request, 'update_series.html', {'series': s_update})
 
+
+
 def delete_series(request,delete_ser):
   delete=Series.objects.get(id=delete_ser)
   delete.delete()
-  return redirect('admin_home')
-  
-def remove_series_watchlist(request,ws_id):
-  ws_delete=SeriesWatchlist.objects.get(id=ws_id)
-  ws_delete.delete()
-  return redirect('series')
+  return redirect('admin_manage_series')
