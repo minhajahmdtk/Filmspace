@@ -84,8 +84,7 @@
         <p>Total Movies</p>
         <div class="btn-group">
           <a href="{% url 'add_movie' %}" class="btn btn-success btn-custom">Add</a>
-          <a href="{% url 'update_movie' %}" class="btn btn-warning btn-custom">Update</a>
-          <a href="" class="btn btn-danger btn-custom">Delete</a>
+          <a href="{% url 'admin_manage_movies' %}" class="btn btn-warning btn-custom">Update</a>
         </div>
       </div>
     </div>
@@ -97,8 +96,8 @@
         <p>Total Series</p>
         <div class="btn-group">
           <a href="{% url 'add_series' %}" class="btn btn-success btn-custom">Add</a>
-          <a href="{% url 'update_series' %}" class="btn btn-warning btn-custom">Update</a>
-          <a href="" class="btn btn-danger btn-custom">Delete</a>
+          <a href="{% url 'admin_manage_series' %}" class="btn btn-warning btn-custom">Update</a>
+          
         </div>
       </div>
     </div>

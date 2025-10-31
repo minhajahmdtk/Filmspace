@@ -180,6 +180,11 @@ def add_movie(request):
       return redirect('admin_home')
     return render(request,'add_movie.html')
 
+
+def admin_manage_movies(request):
+  admin_movies=Movie.objects.all()
+  return render(request,'admin_manage_movies.html',{'admin_movies':admin_movies})
+
 def update_movie(request, p_id):
     m_update = Movie.objects.get(id=p_id)
 
@@ -221,6 +226,12 @@ def add_series(request):
     return redirect('admin_home')
   return render(request,'add_series.html')
 
+
+def admin_manage_series(request):
+  admin_series=Series.objects.all()
+  return render(request,'admin_manage_series.html',{'admin_series':admin_series})
+
+
 def update_series(request, up_id):
     s_update = Series.objects.get(id=up_id)
     if request.method == "POST":
@@ -244,3 +255,7 @@ def delete_series(request,delete_ser):
   delete.delete()
   return redirect('admin_home')
   
+def remove_series_watchlist(request,ws_id):
+  ws_delete=SeriesWatchlist.objects.get(id=ws_id)
+  ws_delete.delete()
+  return redirect('series')
