@@ -2,22 +2,38 @@
 {% block title %}Home | FilmSpace{% endblock %}
 {% load static %}
 {% block content %}
-  
-<div style="text-align: center; margin-top: 50px;">
-  <div>
-    <a href="{% url 'movies' %}">
-      <img src="{% static 'movies.jpg' %}" 
-         alt="Movies" 
-         style="width: 300px; height: 300px; margin: 20px; border-radius: 10px; cursor: pointer;">
-    </a>
- </div> 
 
-  <div> 
-    <a href="{% url 'series' %}">
-      <img src="{% static 'series.jpg' %}" 
-         alt="Series" 
-         style="width: 300px; height: 300px; margin: 20px; border-radius: 10px; cursor: pointer;">
-    </a>
+<div class="container my-5">
+  <h1 class="text-center mb-4">Explore FilmSpace</h1>
+  <div class="row justify-content-center">
+
+    <!-- Movies Card -->
+    <div class="col-md-5 mb-4">
+      <div class="card shadow-lg position-relative border-0">
+        <a href="{% url 'movies' %}">
+          <img src="{% static 'movies.jpg' %}" class="card-img" alt="Movies" style="height:400px; object-fit:cover; border-radius:10px;">
+          <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center">
+            <h3 class="text-white fw-bold" style="text-shadow:0 0 10px rgba(0,0,0,0.8);">Movies</h3>
+            <p class="text-white mb-0" style="text-shadow:0 0 10px rgba(0,0,0,0.8);">Discover trending and classic movies.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Series Card -->
+    <div class="col-md-5 mb-4">
+      <div class="card shadow-lg position-relative border-0">
+        <a href="{% url 'series' %}">
+          <img src="{% static 'series.jpg' %}" class="card-img" alt="Series" style="height:400px; object-fit:cover; border-radius:10px;">
+          <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center">
+            <h3 class="text-white fw-bold" style="text-shadow:0 0 10px rgba(0,0,0,0.8);">Series</h3>
+            <p class="text-white mb-0" style="text-shadow:0 0 10px rgba(0,0,0,0.8);">Watch your favorite shows and web series.</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
   </div>
 </div>
+
 {% endblock %}

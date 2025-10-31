@@ -69,7 +69,7 @@ def movies(request):
 
 def series(request):
   series=Series.objects.all()
-  paginator=Paginator(series,1)
+  paginator=Paginator(series,2)
   page=int(request.GET.get('page',1))
   try:
     series=paginator.page(page)
@@ -120,7 +120,7 @@ def add_series_watchlist(request,series_id):
         
 def movie_watchlist(request):
     mov_watch = MovieWatchlist.objects.all()
-    pag=Paginator(mov_watch,1)
+    pag=Paginator(mov_watch,2)
     page=int(request.GET.get('page',1))
     try:
       mov_watchlist=pag.page(page)
@@ -130,19 +130,20 @@ def movie_watchlist(request):
 
 
 def remove_movie_watchlist(request,wm_id):
+    page = request.GET.get('page', 1)
     try:
         ws_delete = MovieWatchlist.objects.get(id=wm_id)
         ws_delete.delete()
     except MovieWatchlist.DoesNotExist:
         messages.warning(request, "No movie found on the watchlist.")
     
-    return redirect('movie_watchlist')
+    return redirect(f'/movie_watchlist?page={page}')
 
 
 
 def series_watchlist(request):
     ser_watch = SeriesWatchlist.objects.all()
-    sr_watchlist=Paginator(ser_watch,1)
+    sr_watchlist=Paginator(ser_watch,2)
     page=int(request.GET.get('page',1))
 
     try:
@@ -153,12 +154,13 @@ def series_watchlist(request):
 
   
 def remove_series_watchlist(request,ws_id):
+  page = request.GET.get('page', 1)
   try:
     ws_delete=SeriesWatchlist.objects.get(id=ws_id)
     ws_delete.delete()
   except SeriesWatchlist.DoesNotExist:
         messages.warning(request, "No series found on the watchlist.")
-  return redirect('series_watchlist')
+  return redirect(f'/series_watchlist?page={page}')
 
 
 
