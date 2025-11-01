@@ -64,7 +64,7 @@
   <!-- ✅ Your Original Code (Unchanged) -->
   <div class="container" style="padding-top: 120px;">
     <h1 class="text-center mb-4 fw-bold text-dark">Movies</h1>
-
+{% if mov1 %}
     <div class="row">
       {% for mov in mov1 %}
       <div class="col-md-4 mb-4">
@@ -73,9 +73,8 @@
           <div class="card-body">
             <h5 class="fw-bold">{{ mov.movie_name }} ({{ mov.movie_year }})</h5>
             <p class="mb-1"><strong>Director:</strong> {{ mov.movie_director }}</p>
-            <p class="mb-1"><strong>Genre:</strong> {{ mov.movie_genre }}</p>
-            <p class="mb-1"><strong>Language:</strong> {{ mov.movie_language }}</p>
-            <p class="small text-muted">{{ mov.movie_description }}</p>
+            <p class="mb-1"> {{ mov.movie_genre }}- {{ mov.movie_language }}</p>
+            <p class="small text-light">{{ mov.movie_description }}</p>
           </div>
         </div>
         <div class="text-center mt-3">
@@ -86,6 +85,14 @@
       </div>
       {% endfor %}
     </div>
+    {% else %}
+    <div class="text-center mt-5">
+        <h4 class="text-muted"> No movies  yet!!!</h4>
+        
+        
+      </div>
+    {% endif %}
+
 
     <!-- Pagination -->
     {% if mov1.paginator.num_pages > 1 %}
@@ -97,9 +104,14 @@
     {% endif %}
   </div>
 
-  {% for mov in messages %}
-  <p>{{ mov }}</p>
-  {% endfor %}
+  <div class="d-flex justify-content-center mt-4">
+  <div class="text-center text-danger fw-semibold fs-5">
+    {% for mov in messages %}
+      <p class="mb-1">{{ mov }}</p>
+    {% endfor %}
+  </div>
+</div>
+
 
 </body>
 </html>

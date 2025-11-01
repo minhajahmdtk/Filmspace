@@ -64,7 +64,7 @@
   <!-- ✅ Main Content -->
   <div class="container" style="padding-top: 120px;">
     <h1 class="text-center mb-4 fw-bold text-dark">Series</h1>
-
+{% if ser1 %}
     <div class="row">
       {% for sr in ser1 %}
       <div class="col-md-4 mb-4">
@@ -76,7 +76,7 @@
             <p class="mb-1"><strong>Genre:</strong> {{ sr.series_genre }}</p>
             <p class="mb-1"><strong>Language:</strong> {{ sr.series_language }}</p>
             <p class="mb-1"><strong>Seasons:</strong> {{ sr.series_seasons }}</p>
-            <p class="small text-muted">{{ sr.series_description }}</p>
+            <p class="small text">{{ sr.series_description }}</p>
           </div>
         </div>
         <div class="text-center mt-3">
@@ -88,6 +88,13 @@
       </div>
       {% endfor %}
     </div>
+    {% else %}
+<div class="text-center mt-5">
+        <h4 class="text-muted"> No series  yet!!!!</h4>
+       
+        
+      </div>
+    {% endif %}
 
     <!-- Pagination -->
     {% if ser1.paginator.num_pages > 1 %}
@@ -99,9 +106,13 @@
     {% endif %}
   </div>
 
-  {% for sr in messages %}
-  <p>{{ sr }}</p>
-  {% endfor %}
+ <div class="d-flex justify-content-center mt-4">
+  <div class="text-center text-danger fw-semibold fs-5">
+    {% for sr in messages %}
+      <p class="mb-1">{{ sr }}</p>
+    {% endfor %}
+  </div>
+</div>
 
 </body>
 </html>

@@ -75,7 +75,7 @@
     {% endif %}
 
     <!-- Movie Watchlist -->
-    <h1 class="text-center mb-4 fw-bold text-dark">Your Movie Watchlist</h1>
+    <h1 class="text-center mb-4 fw-bold text-dark"> Your Movie Watchlist</h1>
 
     {% if mov_watch %}
       <div class="row">
@@ -85,7 +85,7 @@
             <img src="{{ i.movie_image.url }}" class="card-img-top rounded-top-4" alt="{{ i.movie_name }}" height="250" style="object-fit: cover;">
             <div class="card-body">
               <h5 class="fw-bold text-center">{{ i.movie_name }} ({{ i.movie_year }})</h5>
-              <p class="text-muted text-center">{{ i.movie_genre }}</p>
+              <p class="text-light text-center">{{ i.movie_genre }}</p>
             </div>
           </div>
 
@@ -101,8 +101,7 @@
       <div class="text-center mt-5">
         <h4 class="text-muted"> No movies in your watchlist yet.</h4>
         <p class="text-secondary">Browse and add your favorite movies to start building your list!</p>
-        
-      </div>
+
     {% endif %}
 
     <!-- Pagination -->
