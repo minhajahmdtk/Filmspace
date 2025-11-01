@@ -4,7 +4,7 @@
 {% block content %}
 
 <div class="container mt-5">
-  <h2 class="text-center mb-4 fw-bold">🎬 Manage & Update Movies</h2>
+  <h2 class="text-center mb-4 fw-bold">Manage Movies</h2>
 
   <div class="row">
     {% for mov in admin_movies %}
@@ -21,11 +21,11 @@
           </div>
 
           <div class="text-center mt-3">
-            <a href="{% url 'update_movie' mov.id %}" class="btn btn-success btn-sm px-3 rounded-pill shadow-sm">
-              ✏️ Update
+            <a href="{% url 'update_movie' mov.id %}" class="btn btn-success btn-sm px-3  shadow-sm">
+               Update
             </a>
-            <a href="{% url 'delete_movie' mov.id %}" class="btn btn-danger btn-sm px-3 rounded-pill shadow-sm">
-              🗑 Delete
+            <a href="{% url 'delete_movie' mov.id %}" class="btn btn-danger btn-sm px-3  shadow-sm">
+               Delete
             </a>
           </div>
         </div>
@@ -40,7 +40,7 @@
   {% if admin_movies.paginator.num_pages > 1 %}
     <div class="text-center mt-4">
       {% for i in admin_movies.paginator.page_range %}
-      <a href="?page={{ i }}" class="btn btn-outline-dark mx-1">{{ i }}</a>
+      <a href="?page={{ i }}" class="btn btn-light mx-1">{{ i }}</a>
       {% endfor %}
     </div>
     {% endif %}

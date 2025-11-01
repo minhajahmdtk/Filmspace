@@ -1,106 +1,55 @@
 {% extends 'admin_base.html' %}
-{% block title %}Home | FilmSpace{% endblock %}
+{% block title %}Admin Home | FilmSpace{% endblock %}
 {% load static %}
-
 {% block content %}
-<style>
-  .dashboard-title {
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
-  }
 
-  .stat-card {
-    background-image: url("{% static 'images/admin_bg.jpg' %}");
-    background-size: cover;
-    background-position: center;
-    border-radius: 15px;
-    color: white;
-    text-align: center;
-    padding: 50px 20px;
-    margin: 20px auto;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease-in-out;
-    max-width: 400px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .stat-card::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 15px;
-  }
-
-  .stat-card h1, .stat-card p, .stat-card .btn-group {
-    position: relative;
-    z-index: 1;
-  }
-
-  .stat-card h1 {
-    font-size: 3.5rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-
-  .stat-card p {
-    font-size: 1.3rem;
-    letter-spacing: 1px;
-  }
-
-  .stat-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-  }
-
-  .btn-group {
-    margin-top: 20px;
-  }
-
-  .btn-custom {
-    border-radius: 25px;
-    padding: 8px 20px;
-    font-weight: 500;
-    margin: 0 5px;
-    transition: all 0.3s ease;
-  }
-
-  .btn-custom:hover {
-    transform: scale(1.05);
-  }
-</style>
-
-<div class="container mt-5">
-  <h2 class="dashboard-title">🎬 FilmSpace Admin Dashboard</h2>
+<div class="container my-5">
+  <div class="text-center mb-4 d-flex justify-content-center align-items-center">
+  <img src="{% static 'images/filmspace_logo.png' %}" 
+       alt="FilmSpace Logo" width="45" height="45" class="me-2 rounded">
+  <span class="fw-bold fs-4 text-dark">FilmSpace</span>
+</div>
+  <h1 class="text-center mb-4 fw-bold">Manage your Movies</h1>
 
   <div class="row justify-content-center">
+
     <!-- Movies Card -->
-    <div class="col-md-4">
-      <div class="stat-card">
-        <h1>{{ total_movies }}</h1>
-        <p>Total Movies</p>
-        <div class="btn-group">
-          <a href="{% url 'add_movie' %}" class="btn btn-success btn-custom">Add</a>
-          <a href="{% url 'admin_manage_movies' %}" class="btn btn-warning btn-custom">Update</a>
+    <div class="col-md-5 mb-4">
+      <div class="card shadow-lg position-relative border-0 overflow-hidden">
+        <img src="{% static 'movies.jpg' %}" class="card-img" alt="Movies" style="height:400px; object-fit:cover; border-radius:10px;">
+        <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center"
+             style="background: rgba(0,0,0,0.5); border-radius:10px; transition: all 0.3s;">
+          <h3 class="text-white fw-bold" style="text-shadow:0 0 10px rgba(0,0,0,0.8);">Movies</h3>
+          <p class="text-white mb-3" style="text-shadow:0 0 10px rgba(0,0,0,0.8);">
+            Discover and manage trending and classic movies.
+          </p>
+          <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'add_movie' %}" class="btn btn-success px-3">Add</a>
+            <a href="{% url 'admin_manage_movies' %}" class="btn btn-warning px-3">Update</a>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- Series Card -->
-    <div class="col-md-4">
-      <div class="stat-card">
-        <h1>{{ total_series }}</h1>
-        <p>Total Series</p>
-        <div class="btn-group">
-          <a href="{% url 'add_series' %}" class="btn btn-success btn-custom">Add</a>
-          <a href="{% url 'admin_manage_series' %}" class="btn btn-warning btn-custom">Update</a>
-          
+    <div class="col-md-5 mb-4">
+      <div class="card shadow-lg position-relative border-0 overflow-hidden">
+        <img src="{% static 'series.jpg' %}" class="card-img" alt="Series" style="height:400px; object-fit:cover; border-radius:10px;">
+        <div class="card-img-overlay d-flex flex-column justify-content-center align-items-center text-center"
+             style="background: rgba(0,0,0,0.5); border-radius:10px; transition: all 0.3s;">
+          <h3 class="text-white fw-bold" style="text-shadow:0 0 10px rgba(0,0,0,0.8);">Series</h3>
+          <p class="text-white mb-3" style="text-shadow:0 0 10px rgba(0,0,0,0.8);">
+            Manage popular and classic TV shows and web series.
+          </p>
+          <div class="d-flex justify-content-center gap-3">
+            <a href="{% url 'add_series' %}" class="btn btn-success px-3">Add</a>
+            <a href="{% url 'admin_manage_series' %}" class="btn btn-warning px-3">Update</a>
+          </div>
         </div>
       </div>
     </div>
+
   </div>
 </div>
+
 {% endblock %}
