@@ -24,8 +24,8 @@
 
     <!-- Left: Logo -->
     <div class="d-flex align-items-center mb-2 mb-md-0">
-      <img src="{% static 'images/filmspace_logo.png' %}" 
-           alt="FilmSpace Logo" width="45" height="45" class="me-2 rounded">
+      <img src="{% static 'fs3.png' %}" 
+           alt="FilmSpace Logo" width="35px" height="35px" style="margin-left:20px">
     </div>
 
     <!-- Center: Home -->
@@ -63,22 +63,25 @@
 
   <!-- ✅ Main Content -->
   <div class="container" style="padding-top: 120px;">
-    <h1 class="text-center mb-4 fw-bold text-dark">Series</h1>
-{% if ser1 %}
+
+    {% if ser1 %}
     <div class="row">
       {% for sr in ser1 %}
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100 border-0 rounded-4 overflow-hidden">
-          <img src="{{ sr.series_image.url }}" class="card-img-top" alt="{{ sr.series_image }}">
+      <!-- Responsive column -->
+      <div class="col-12 col-sm-6 col-md-4 mb-5 d-flex flex-column">
+        
+        <!-- Card -->
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden flex-grow-1">
+          <img src="{{ sr.series_image.url }}" class="card-img-top" alt="{{ sr.series_image }}" style="height: 250px; object-fit: cover;">
           <div class="card-body">
-            <h5 class="fw-bold">{{ sr.series_name }} ({{ sr.series_year }})</h5>
-            <p class="mb-1"><strong>Director:</strong> {{ sr.series_director }}</p>
-            <p class="mb-1"><strong>Genre:</strong> {{ sr.series_genre }}</p>
-            <p class="mb-1"><strong>Language:</strong> {{ sr.series_language }}</p>
-            <p class="mb-1"><strong>Seasons:</strong> {{ sr.series_seasons }}</p>
+            <h4 class="fw-bold">{{ sr.series_name }} ({{ sr.series_year }})</h4>
+            <h6 class="mb-1"><strong>Director:</strong> {{ sr.series_director }}</h6>
+            <p class="mb-1">{{ sr.series_genre }} • {{ sr.series_language }} • {{ sr.series_seasons }}</p>
             <p class="small text">{{ sr.series_description }}</p>
           </div>
         </div>
+
+        <!-- Button outside card -->
         <div class="text-center mt-3">
           <a href="{% url 'add_series_watchlist' sr.id %}?page={{ ser1.number }}" 
              class="btn btn-outline-dark fw-semibold px-4 py-2">
@@ -88,12 +91,14 @@
       </div>
       {% endfor %}
     </div>
+
+    <!-- Space below all cards -->
+    <div style="margin-bottom: 60px;"></div>
+
     {% else %}
-<div class="text-center mt-5">
-        <h4 class="text-muted"> No series  yet!!!!</h4>
-       
-        
-      </div>
+    <div class="text-center mt-5" style="margin-bottom: 100px;">
+      <h4 class="text-muted">No series yet!!!!</h4>
+    </div>
     {% endif %}
 
     <!-- Pagination -->
@@ -106,13 +111,14 @@
     {% endif %}
   </div>
 
- <div class="d-flex justify-content-center mt-4">
-  <div class="text-center text-danger fw-semibold fs-5">
-    {% for sr in messages %}
-      <p class="mb-1">{{ sr }}</p>
-    {% endfor %}
+  <!-- ✅ Messages -->
+  <div class="d-flex justify-content-center mt-4">
+    <div class="text-center text-danger fw-semibold fs-5">
+      {% for sr in messages %}
+        <p class="mb-1">{{ sr }}</p>
+      {% endfor %}
+    </div>
   </div>
-</div>
 
 </body>
 </html>

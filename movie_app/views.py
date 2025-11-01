@@ -59,7 +59,7 @@ def register(request):
 
 def movies(request):
   movies=Movie.objects.all()
-  paginator=Paginator(movies,1)
+  paginator=Paginator(movies,9)
   page=int(request.GET.get('page',1))
   try:
     movies=paginator.page(page)
@@ -69,7 +69,7 @@ def movies(request):
 
 def series(request):
   series=Series.objects.all()
-  paginator=Paginator(series,2)
+  paginator=Paginator(series,9)
   page=int(request.GET.get('page',1))
   try:
     series=paginator.page(page)
@@ -120,7 +120,7 @@ def add_series_watchlist(request,series_id):
         
 def movie_watchlist(request):
     mov_watch = MovieWatchlist.objects.all()
-    pag=Paginator(mov_watch,2)
+    pag=Paginator(mov_watch,9)
     page=int(request.GET.get('page',1))
     try:
       mov_watchlist=pag.page(page)
@@ -143,7 +143,7 @@ def remove_movie_watchlist(request,wm_id):
 
 def series_watchlist(request):
     ser_watch = SeriesWatchlist.objects.all()
-    sr_watchlist=Paginator(ser_watch,2)
+    sr_watchlist=Paginator(ser_watch,9)
     page=int(request.GET.get('page',1))
 
     try:
@@ -208,7 +208,7 @@ def add_movie(request):
 
 def admin_manage_movies(request):
   admin_movies_list=Movie.objects.all()
-  paginator=Paginator(admin_movies_list,1)
+  paginator=Paginator(admin_movies_list,9)
   page=request.GET.get('page',1)
   try:
     admin_movies=paginator.page(page)
@@ -262,7 +262,7 @@ def add_series(request):
 
 def admin_manage_series(request):
   admin_series_list=Series.objects.all()
-  paginator=Paginator(admin_series_list,1)
+  paginator=Paginator(admin_series_list,9)
   page=request.GET.get('page',1)
   try:
     admin_series=paginator.page(page)

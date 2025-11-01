@@ -24,8 +24,8 @@
 
     <!-- Left: Logo -->
     <div class="d-flex align-items-center mb-2 mb-md-0">
-      <img src="{% static 'images/filmspace_logo.png' %}" 
-           alt="FilmSpace Logo" width="45" height="45" class="me-2 rounded">
+      <img src="{% static 'fs3.png' %}" 
+           alt="FilmSpace Logo" width="35px" height="35px" style="margin-left:20px">
     </div>
 
     <!-- Center: Home -->
@@ -61,57 +61,64 @@
     </div>
   </div>
 
-  <!-- ✅ Your Original Code (Unchanged) -->
+  <!-- ✅ Main Content -->
   <div class="container" style="padding-top: 120px;">
-    <h1 class="text-center mb-4 fw-bold text-dark">Movies</h1>
-{% if mov1 %}
+
+    {% if mov1 %}
     <div class="row">
-      {% for mov in mov1 %}
-      <div class="col-md-4 mb-4">
-        <div class="card shadow-sm h-100 border-0 rounded-4 overflow-hidden">
-          <img src="{{ mov.movie_image.url }}" class="card-img-top" alt="{{ mov.movie_image }}">
+      {% for mv in mov1 %}
+      <!-- Responsive column -->
+      <div class="col-12 col-sm-6 col-md-4 mb-5 d-flex flex-column">
+        
+        <!-- Card -->
+        <div class="card shadow-sm border-0 rounded-4 overflow-hidden flex-grow-1">
+          <img src="{{ mv.movie_image.url }}" class="card-img-top" alt="{{ mv.movie_image }}" style="height: 250px; object-fit: cover;">
           <div class="card-body">
-            <h5 class="fw-bold">{{ mov.movie_name }} ({{ mov.movie_year }})</h5>
-            <p class="mb-1"><strong>Director:</strong> {{ mov.movie_director }}</p>
-            <p class="mb-1"> {{ mov.movie_genre }}- {{ mov.movie_language }}</p>
-            <p class="small text-light">{{ mov.movie_description }}</p>
+            <h4 class="fw-bold">{{ mv.movie_name }} ({{ mv.movie_year }})</h4>
+            <h6 class="mb-1"><strong>Director:</strong> {{ mv.movie_director }}</h6>
+            <p class="mb-1">{{ mv.movie_genre }} • {{ mv.movie_language }}</p>
+            <p class="small text">{{ mv.movie_description }}</p>
           </div>
         </div>
+
+        <!-- Button outside card -->
         <div class="text-center mt-3">
-          <a href="{% url 'add_movie_watchlist' mov.id %}?page={{ mov1.number }}" class="btn btn-outline-dark fw-semibold px-4 py-2">
+          <a href="{% url 'add_movie_watchlist' mv.id %}?page={{ mov1.number }}" 
+             class="btn btn-outline-dark fw-semibold px-4 py-2">
             Move to Watchlist
           </a>
         </div>
       </div>
       {% endfor %}
     </div>
-    {% else %}
-    <div class="text-center mt-5">
-        <h4 class="text-muted"> No movies  yet!!!</h4>
-        
-        
-      </div>
-    {% endif %}
 
+    <!-- Space below all cards -->
+    <div style="margin-bottom: 60px;"></div>
+
+    {% else %}
+    <div class="text-center mt-5" style="margin-bottom: 100px;">
+      <h4 class="text-muted">No movies yet!!!!</h4>
+    </div>
+    {% endif %}
 
     <!-- Pagination -->
     {% if mov1.paginator.num_pages > 1 %}
     <div class="text-center mt-4">
-      {% for mov in mov1.paginator.page_range %}
-      <a href="?page={{ mov }}" class="btn btn-light mx-1">{{ mov }}</a>
+      {% for mv in mov1.paginator.page_range %}
+      <a href="?page={{ mv }}" class="btn btn-light mx-1">{{ mv }}</a>
       {% endfor %}
     </div>
     {% endif %}
   </div>
 
+  <!-- ✅ Messages -->
   <div class="d-flex justify-content-center mt-4">
-  <div class="text-center text-danger fw-semibold fs-5">
-    {% for mov in messages %}
-      <p class="mb-1">{{ mov }}</p>
-    {% endfor %}
+    <div class="text-center text-danger fw-semibold fs-5">
+      {% for mv in messages %}
+        <p class="mb-1">{{ mv }}</p>
+      {% endfor %}
+    </div>
   </div>
-</div>
-
 
 </body>
 </html>

@@ -6,44 +6,52 @@
 <div class="container mt-5">
   <h2 class="text-center mb-4 fw-bold">Manage Movies</h2>
 
+  {% if admin_movies %}
   <div class="row">
     {% for mov in admin_movies %}
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-lg border-0 rounded-4 h-100">
+    <div class="col-12 col-sm-6 col-md-4 mb-4 d-flex flex-column align-items-stretch">
+      <div class="card shadow-lg border-0 rounded-4 h-100 overflow-hidden">
         <img src="{{ mov.movie_image.url }}" class="card-img-top rounded-top-4" alt="{{ mov.movie_name }}" height="250" style="object-fit: cover;">
 
         <div class="card-body">
           <h5 class="card-title text-center fw-bold mb-2">{{ mov.movie_name }}</h5>
-          <p class="text-light text-center mb-3">{{ mov.movie_year }} </p>
-
-          <div class="mb-2">
-            <strong>Director:</strong> {{ mov.movie_director }}
-          </div>
-
-          <div class="text-center mt-3">
-            <a href="{% url 'update_movie' mov.id %}" class="btn btn-success btn-sm px-3  shadow-sm">
-               Update
-            </a>
-            <a href="{% url 'delete_movie' mov.id %}" class="btn btn-danger btn-sm px-3  shadow-sm">
-               Delete
-            </a>
-          </div>
+          <p class="text-center text-light mb-2">{{ mov.movie_year }}</p>
+          <p class="text-center small mb-0">
+            {{ mov.movie_genre }}
+            <span class="mx-1 text-secondary">•</span>
+            {{ mov.movie_language }}
+            <span class="mx-1 text-secondary">•</span>
+            {{ mov.movie_duration }}
+          </p>
         </div>
       </div>
+
+      <!-- ✅ Buttons outside the card -->
+      <div class="text-center mt-3">
+        <a href="{% url 'update_movie' mov.id %}" class="btn btn-success btn-sm px-3 shadow-sm me-2">
+          Update
+        </a>
+        <a href="{% url 'delete_movie' mov.id %}" class="btn btn-danger btn-sm px-3 shadow-sm">
+          Delete
+        </a>
+      </div>
     </div>
-    {% empty %}
-    <p class="text-center text-muted mt-5">No movies available yet.</p>
     {% endfor %}
   </div>
-</div>
-
-  {% if admin_movies.paginator.num_pages > 1 %}
-    <div class="text-center mt-4">
-      {% for i in admin_movies.paginator.page_range %}
-      <a href="?page={{ i }}" class="btn btn-light mx-1">{{ i }}</a>
-      {% endfor %}
-    </div>
-    {% endif %}
+  {% else %}
+  <div class="text-center mt-5">
+    <h5 class="text-muted">No movies available yet.</h5>
   </div>
+  {% endif %}
+
+  <!-- ✅ Pagination -->
+  {% if admin_movies.paginator.num_pages > 1 %}
+  <div class="text-center mt-4">
+    {% for i in admin_movies.paginator.page_range %}
+    <a href="?page={{ i }}" class="btn btn-light mx-1">{{ i }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
 
 {% endblock %}

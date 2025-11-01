@@ -1,49 +1,57 @@
 {% extends 'admin_base.html' %}
-{% block title %}Manage Movies | FilmSpace{% endblock %}
+{% block title %}Manage Series | FilmSpace{% endblock %}
 {% load static %}
 {% block content %}
 
 <div class="container mt-5">
-  <h2 class="text-center mb-4 fw-bold">Manage Movies</h2>
+  <h2 class="text-center mb-4 fw-bold">Manage Series</h2>
 
+  {% if admin_series %}
   <div class="row">
     {% for sr in admin_series %}
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-lg border-0 rounded-4 h-100">
+    <div class="col-12 col-sm-6 col-md-4 mb-4 d-flex flex-column align-items-stretch">
+      <div class="card shadow-lg border-0 rounded-4 h-100 overflow-hidden">
         <img src="{{ sr.series_image.url }}" class="card-img-top rounded-top-4" alt="{{ sr.series_name }}" height="250" style="object-fit: cover;">
 
         <div class="card-body">
           <h5 class="card-title text-center fw-bold mb-2">{{ sr.series_name }}</h5>
-          <p class="text-light text-center mb-3">{{ sr.series_year }} </p>
-
-          <div class="mb-2">
-            <strong>Director:</strong> {{ sr.series_director }}
-          </div>
-
-          <div class="text-center mt-3">
-            <a href="{% url 'update_series' sr.id %}" class="btn btn-success btn-sm px-3  shadow-sm">
-             Update
-            </a>
-            <a href="{% url 'delete_series' sr.id %}" class="btn btn-danger btn-sm px-3 shadow-sm">
-              Delete
-            </a>
-          </div>
+          <p class="text-center text-light mb-2">{{ sr.series_year }}</p>
+          <p class="text-center small mb-0">
+            {{ sr.series_genre }} 
+            <span class="mx-1 text-secondary">•</span> 
+            {{ sr.series_language }} 
+            <span class="mx-1 text-secondary">•</span> 
+            {{ sr.series_seasons }}
+          </p>
         </div>
       </div>
+
+      <!-- ✅ Buttons outside the card -->
+      <div class="text-center mt-3">
+        <a href="{% url 'update_series' sr.id %}" class="btn btn-success btn-sm px-3 shadow-sm me-2">
+          Update
+        </a>
+        <a href="{% url 'delete_series' sr.id %}" class="btn btn-danger btn-sm px-3 shadow-sm">
+          Delete
+        </a>
+      </div>
     </div>
-    {% empty %}
-    <p class="text-center text-muted mt-5">No series available yet.</p>
     {% endfor %}
   </div>
-</div>
-
-  {% if admin_series.paginator.num_pages > 1 %}
-    <div class="text-center mt-4">
-      {% for i in admin_series.paginator.page_range %}
-      <a href="?page={{ i }}" class="btn btn-light mx-1">{{ i }}</a>
-      {% endfor %}
-    </div>
-    {% endif %}
+  {% else %}
+  <div class="text-center mt-5">
+    <h5 class="text-muted">No series available yet.</h5>
   </div>
+  {% endif %}
+
+  <!-- ✅ Pagination -->
+  {% if admin_series.paginator.num_pages > 1 %}
+  <div class="text-center mt-4">
+    {% for i in admin_series.paginator.page_range %}
+    <a href="?page={{ i }}" class="btn btn-light mx-1">{{ i }}</a>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
 
 {% endblock %}
