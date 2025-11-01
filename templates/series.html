@@ -5,65 +5,103 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FilmSpace</title>
+
+  <!-- Bootstrap -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- Bootstrap Icons -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
   <link rel="stylesheet" href="{% static 'website.css' %}">
 </head>
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="">FilmSpace</a>
-      <div class="mx-auto">
-        <a class="nav-link text-white" href="{% url 'home' %}">Home</a>
-      </div>
-      <div>
-        <a class="btn btn-outline-light" href="{% url 'logout' %}">Sign Out</a>
-      </div>
 
-      <div class="text-center mt-3">
-  <a href="{% url 'series_watchlist' %}" class="btn btn-outline-warning px-4 py-2">View Watchlist </a>
-</div>
+<body style="background-color: #ffffff; min-height: 100vh; overflow-x: hidden;">
+
+  <!-- ✅ Responsive Transparent Header -->
+  <div class="container-fluid position-fixed top-0 start-0 py-3 px-4 d-flex flex-wrap justify-content-between align-items-center"
+       style="z-index: 1000; background: rgba(255,255,255,0.6); backdrop-filter: blur(5px);">
+
+    <!-- Left: Logo -->
+    <div class="d-flex align-items-center mb-2 mb-md-0">
+      <img src="{% static 'images/filmspace_logo.png' %}" 
+           alt="FilmSpace Logo" width="45" height="45" class="me-2 rounded">
     </div>
-  </nav>
 
+    <!-- Center: Home -->
+    <div class="text-center mb-2 mb-md-0 position-absolute start-50 translate-middle-x">
+      <a class="fw-semibold text-decoration-none px-3 py-2 rounded"
+         href="{% url 'home' %}"
+         style="color:#000;">
+        Home
+      </a>
+    </div>
 
+    <!-- Right: Buttons -->
+    <div class="d-none d-md-flex gap-2 justify-content-end">
+      <a href="{% url 'series_watchlist' %}" 
+         class="btn btn-outline-dark fw-semibold px-4 py-2">
+        View Watchlist
+      </a>
+      <a href="{% url 'logout' %}" 
+         class="btn btn-outline-dark fw-semibold px-4 py-2">
+        Sign Out
+      </a>
+    </div>
 
-<div class="container my-5">
-  <h1 class="text-center mb-4">Series</h1>
-  <div class="row">
-    {% for sr in ser1 %}
-    <div class="col-md-4 mb-4">
-      <div class="card shadow-sm h-100">
-        <img src="{{sr.series_image.url}}" class="card-img-top" alt="{{sr.series_image}}">
-        <div class="card-body">
-          <div class="series-title">{{sr.series_name}} ({{sr.series_year}})</div>
-          <div class="series-director">Director: {{sr.series_director}}</div>
-          <div class="series-description">{{sr.series_genre}}</div>
-          <div class="series-language">{{sr.series_language}}</div>
-          <div class="series-seasons">{{sr.series_seasons}}</div>
-          <div class="series-description">{{sr.series_description}}</div>
+    <!-- Mobile Dropdown -->
+    <div class="dropdown d-md-none">
+      <button class="btn btn-outline-dark dropdown-toggle fw-semibold" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Menu
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end text-center">
+        <li><a class="dropdown-item fw-semibold" href="{% url 'series_watchlist' %}">View Watchlist</a></li>
+        <li><a class="dropdown-item fw-semibold" href="{% url 'logout' %}">Sign Out</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ✅ Main Content -->
+  <div class="container" style="padding-top: 120px;">
+    <h1 class="text-center mb-4 fw-bold text-dark">Series</h1>
+
+    <div class="row">
+      {% for sr in ser1 %}
+      <div class="col-md-4 mb-4">
+        <div class="card shadow-sm h-100 border-0 rounded-4 overflow-hidden">
+          <img src="{{ sr.series_image.url }}" class="card-img-top" alt="{{ sr.series_image }}">
+          <div class="card-body">
+            <h5 class="fw-bold">{{ sr.series_name }} ({{ sr.series_year }})</h5>
+            <p class="mb-1"><strong>Director:</strong> {{ sr.series_director }}</p>
+            <p class="mb-1"><strong>Genre:</strong> {{ sr.series_genre }}</p>
+            <p class="mb-1"><strong>Language:</strong> {{ sr.series_language }}</p>
+            <p class="mb-1"><strong>Seasons:</strong> {{ sr.series_seasons }}</p>
+            <p class="small text-muted">{{ sr.series_description }}</p>
+          </div>
+        </div>
+        <div class="text-center mt-3">
+          <a href="{% url 'add_series_watchlist' sr.id %}?page={{ ser1.number }}" 
+             class="btn btn-outline-dark fw-semibold px-4 py-2">
+            Move to Watchlist
+          </a>
         </div>
       </div>
-      <div class="text-center mt-3">
-  <a href="{% url 'add_series_watchlist' sr.id %}?page={{ ser1.number }}" class="btn btn-outline-warning px-4 py-2">Move to Watchlist</a>
-</div>
-
+      {% endfor %}
     </div>
-    {% endfor %}
+
+    <!-- Pagination -->
+    {% if ser1.paginator.num_pages > 1 %}
+    <div class="text-center mt-4">
+      {% for sr in ser1.paginator.page_range %}
+      <a href="?page={{ sr }}" class="btn btn-light mx-1">{{ sr }}</a>
+      {% endfor %}
+    </div>
+    {% endif %}
   </div>
 
-  {% if ser1.paginator.num_pages > 1 %}
-  <div class="text-center mt-4">
-    {% for sr in ser1.paginator.page_range %}
-    <a href="?page={{ sr }}" class="btn btn-light ">{{ sr }}</a>
-    {% endfor %}
-  </div>
-  {% endif %}
-</div>
+  {% for sr in messages %}
+  <p>{{ sr }}</p>
+  {% endfor %}
 
-{% for sr in messages %}
-<p>{{ sr }}</p>
-{% endfor %}
 </body>
 </html>
