@@ -6,7 +6,7 @@ class Movie(models.Model):
   movie_year=models.IntegerField()
   movie_language=models.CharField(max_length=20,default='None')
   movie_genre=models.CharField(max_length=50,default='None')
-  movie_director=models.CharField(max_length=50)
+  movie_director=models.CharField(max_length=100)
   movie_description=models.TextField()
   movie_image=models.ImageField(upload_to='movie_images')
 
@@ -19,7 +19,7 @@ class Series(models.Model):
   series_language=models.CharField(max_length=10,default='None')
   series_genre=models.CharField(max_length=20,default='None')
   series_seasons=models.CharField(max_length=20)
-  series_director=models.CharField(max_length=50)
+  series_director=models.CharField(max_length=100)
   series_description=models.TextField()
   series_image=models.ImageField(upload_to='series_images')
 

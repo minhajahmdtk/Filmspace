@@ -187,9 +187,6 @@ def admin_home(request):
   total_series=Series.objects.count()
   return render(request,'admin_home.html',{'total_movies':total_movies,'total_series':total_series})
 
-#--------Movie------
-#(Update,Delete,Add)
-#--------Movie------
 
 def add_movie(request):
     if request.method=="POST":
@@ -235,13 +232,13 @@ def update_movie(request, p_id):
     return render(request, 'update_movie.html', {'movie': m_update})
 
 def delete_movie(request,delete_mov):
+  page = request.GET.get('page', 1)
   delete=Movie.objects.get(id=delete_mov)
   delete.delete()
-  return redirect('admin_manage_movies')
+  return redirect(f'/admin_manage_movies?page={page}')
 
-#--------Series------
-#(Update,Delete,Add)
-#--------Series------
+
+
 def add_series(request):
   if request.method=="POST":
     series_name=request.POST['series_name']
@@ -293,6 +290,7 @@ def update_series(request, up_id):
 
 
 def delete_series(request,delete_ser):
+  page = request.GET.get('page', 1)
   delete=Series.objects.get(id=delete_ser)
   delete.delete()
-  return redirect('admin_manage_series')
+  return redirect(f'/admin_manage_series?page={page}')

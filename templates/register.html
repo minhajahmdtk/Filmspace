@@ -12,8 +12,6 @@
 </head>
 
 <body style="background-color: #FFFAF0; min-height: 100vh; overflow-x: hidden;">
-
-  <!-- Fixed Home Link -->
   <div class="position-fixed top-0 start-50 translate-middle-x mt-3" style="z-index: 1000;">
     <a class="fw-semibold text-decoration-none px-3 py-2 rounded"
        href="{% url 'index' %}"
@@ -22,12 +20,11 @@
     </a>
   </div>
 
-  <!-- Main Container -->
+
   <div class="d-flex justify-content-center align-items-start" style="min-height: 100vh;">
     <div class="row shadow-lg overflow-hidden w-100 mx-3 "
          style="max-width: 1150px; border-radius: 20px; background-color: white; margin-top: 55px;">
 
-      <!-- Left Image Section -->
       <div class="col-md-6 p-0 d-flex align-items-center justify-content-center" >
         <img src="{% static 'register1.jpg' %}"
              alt="Register Illustration"
@@ -35,7 +32,6 @@
              style="object-fit: cover; opacity: 0.9; border-top-left-radius: 20px; border-bottom-left-radius: 20px;">
       </div>
 
-      <!-- Right Registration Section -->
       <div class="col-md-6 bg-white p-4 d-flex flex-column justify-content-center">
         <div class="text-center mb-2">
           <h4 class="fw-bold text-dark mb-1"><i class="bi bi-arrow-right-circle"></i>  Register</h4>

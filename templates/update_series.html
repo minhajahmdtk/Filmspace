@@ -9,7 +9,7 @@
 
     <form method="POST" enctype="multipart/form-data">
       {% csrf_token %}
-      <div class="row g-3"> <!-- Compact layout like Update Movie -->
+      <div class="row g-3"> 
         <div class="col-md-6">
           <label class="form-label fw-semibold small mb-1">Series Name</label>
           <input type="text" name="series_name" value="{{ series.series_name }}" class="form-control form-control-sm" required>

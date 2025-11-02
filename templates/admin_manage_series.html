@@ -26,7 +26,7 @@
         </div>
       </div>
 
-      <!-- ✅ Buttons outside the card -->
+      
       <div class="text-center mt-3">
         <a href="{% url 'update_series' sr.id %}" class="btn btn-success btn-sm px-3 shadow-sm me-2">
           Update
@@ -44,7 +44,7 @@
   </div>
   {% endif %}
 
-  <!-- ✅ Pagination -->
+
   {% if admin_series.paginator.num_pages > 1 %}
   <div class="text-center mt-4">
     {% for i in admin_series.paginator.page_range %}

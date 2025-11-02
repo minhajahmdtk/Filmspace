@@ -20,13 +20,11 @@
             {{ mov.movie_genre }}
             <span class="mx-1 text-secondary">•</span>
             {{ mov.movie_language }}
-            <span class="mx-1 text-secondary">•</span>
-            {{ mov.movie_duration }}
           </p>
         </div>
       </div>
 
-      <!-- ✅ Buttons outside the card -->
+      
       <div class="text-center mt-3">
         <a href="{% url 'update_movie' mov.id %}" class="btn btn-success btn-sm px-3 shadow-sm me-2">
           Update
@@ -44,7 +42,7 @@
   </div>
   {% endif %}
 
-  <!-- ✅ Pagination -->
+  
   {% if admin_movies.paginator.num_pages > 1 %}
   <div class="text-center mt-4">
     {% for i in admin_movies.paginator.page_range %}
